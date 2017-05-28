@@ -7,9 +7,16 @@ import csv
 # I haven't bothered with relative paths to the files yet so that'll need updates
 # as well as you'll need to create a cred file and define the absolute path.
 
+#The UserList.csv file from which will you will be loading the users must contain the following columns:
+#EMAIL, FIRST_NAME, LAST_NAME, OFFICE_NAME, AND EMPL_ID
+
+
 #define variables
+# cred.txt are you login credentials for Tracker as a .txt files first line UN, 2nd PWD.
+# UserLog.txt is a log file you need to create it will store the results of the program.
+
 print('What is the Company Name?')
-CompanyName = input()
+CompanyName = input() #This program will ask for the database name. It must match a name in Tracker.
 
 userscreen = str('https://tracker.serengetilaw.com/tracker/Users?FileSubmitted=&ffid=-4')
 
@@ -46,7 +53,7 @@ for row in reader:
         browser.find_by_id('idtxtFirstName').first.fill(row['FIRST_NAME'])
         browser.find_by_id('idtxtLastName').first.fill(row['LAST_NAME'])
         office = browser.find_by_id('idcboCoOfficeID').first
-        office.select(row['OFFICEID'])
+        office.select(row['OFFICE_NAME'])
         browser.find_by_name('txtEmployeeID').first.fill(row['EMPL_ID'])
         time.sleep(1)
 
